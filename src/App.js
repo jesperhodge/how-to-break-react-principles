@@ -5,13 +5,13 @@ const Header = ({ pars, paragraphs, ps, setPars}) => {
     console.log('render')
     return (
         <header className="App-header">
-            <p>Paragraph count: {pars}</p>
+            <p>Paragraph count: {pars.current}</p>
             {paragraphs.map((p, i) => {
-                    setPars(pars + 1)
+                pars.current = pars.current + 1
 
                     return <>
                         <p style={{ color: 'black', backgroundColor: 'white', height: '80px', width: '400px', display: 'flex', alignItems: 'center', paddingLeft: '20px'}}>{p}</p>
-                        <p>Paragraph count: {pars}</p>
+                        <p>Paragraph count: {pars.current}</p>
                     </>
                 }
             )}
@@ -24,15 +24,15 @@ const Header = ({ pars, paragraphs, ps, setPars}) => {
 function App() {
     const paragraphs = ["paragraph 1", "paragraph 2"]
 
-    const [pars, setPars] = useState(0)
+    const pars = useRef(0)
 
-    console.log(pars)
-    const ps = <p>Paragraph count: {pars}</p>
-    console.log(pars)
+    console.log(pars.current)
+    const ps = <p>Paragraph count: {pars.current}</p>
+    console.log(pars.current)
 
     return (
         <div className="App">
-            <Header pars={pars} paragraphs={paragraphs} ps={ps} setPars={setPars}/>
+            <Header pars={pars} paragraphs={paragraphs} ps={ps} />
         </div>
     );
 }
