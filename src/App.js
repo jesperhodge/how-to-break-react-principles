@@ -1,7 +1,7 @@
 import './App.css';
 import {useState, useEffect, useRef} from "react";
 
-const Header = ({ pars, paragraphs, ps, setPars}) => {
+const Header = ({ pars, paragraphs, ps, color}) => {
     console.log('render')
     return (
         <header className="App-header">
@@ -10,7 +10,7 @@ const Header = ({ pars, paragraphs, ps, setPars}) => {
                 pars.current = pars.current + 1
 
                     return <>
-                        <p style={{ color: 'black', backgroundColor: 'white', height: '80px', width: '400px', display: 'flex', alignItems: 'center', paddingLeft: '20px'}}>{p}</p>
+                        <p style={{ color, backgroundColor: 'white', height: '80px', width: '400px', display: 'flex', alignItems: 'center', paddingLeft: '20px'}}>{p}</p>
                         <p>Paragraph count: {pars.current}</p>
                     </>
                 }
@@ -23,6 +23,7 @@ const Header = ({ pars, paragraphs, ps, setPars}) => {
 
 function App() {
     const paragraphs = ["paragraph 1", "paragraph 2"]
+    const [color, setColor] = useState('black')
 
     const pars = useRef(0)
 
@@ -30,9 +31,18 @@ function App() {
     const ps = <p>Paragraph count: {pars.current}</p>
     console.log(pars.current)
 
+    const colors = ['red', 'green', 'cornflowerblue', 'darkgrey']
+
+    const handleClick = () => {
+        setColor(colors[0]);
+        colors.shift();
+    }
+    console.log(color)
+
     return (
         <div className="App">
-            <Header pars={pars} paragraphs={paragraphs} ps={ps} />
+            <Header pars={pars} paragraphs={paragraphs} ps={ps} onClick={handleClick} color={color} />
+            <button onClick={handleClick}>Button!</button>
         </div>
     );
 }
