@@ -24,13 +24,11 @@ const Header = ({ pars, paragraphs, ps, setPars}) => {
 function App() {
     const paragraphs = ["paragraph 1", "paragraph 2"]
 
-    let pars = 0
+    const [pars, setPars] = useState(0)
 
     console.log(pars)
     const ps = <p>Paragraph count: {pars}</p>
     console.log(pars)
-
-    const setPars = (num) => { pars = num }
 
     return (
         <div className="App">
